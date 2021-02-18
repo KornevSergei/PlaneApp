@@ -2,13 +2,18 @@ package com.example.planeapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Timer;
 
@@ -16,14 +21,18 @@ import io.github.controlwear.virtual.joystick.android.JoystickView;
 
 public class GameActivity extends AppCompatActivity {
 
-    private JoystickView joystickView;
     private ImageView planeImageView;
 
-    private Timer timer;
+    private ImageView imageViewMeteorite;
+
     private TextView timerTextView;
+
+
 
     private CountDownTimer countDownTimer;
     public boolean timerRunning;
+
+
 
 
     private long timeLeftInMilliseconds = 60000;
@@ -37,6 +46,9 @@ public class GameActivity extends AppCompatActivity {
 
         planeImageView = findViewById(R.id.planeImageView);
         timerTextView = findViewById(R.id.timerTextView);
+        imageViewMeteorite = findViewById(R.id.imageViewMeteorite);
+
+
         JoystickView joystick = (JoystickView) findViewById(R.id.joystickView);
 
 
@@ -48,29 +60,48 @@ public class GameActivity extends AppCompatActivity {
 
                     planeImageView.animate().translationXBy(20).translationYBy(0).setDuration(0);
 
+
+
+
                 } else if (angle > 45 && angle < 135) {
 
                     planeImageView.animate().translationXBy(0).translationYBy(-20).setDuration(0);
+
 
                 } else if (angle > 135 && angle < 225) {
 
                     planeImageView.animate().translationXBy(-20).translationYBy(0).setDuration(0);
 
 
+
                 } else if (angle > 225 && angle < 315) {
 
                     planeImageView.animate().translationXBy(0).translationYBy(20).setDuration(0);
+
                 }
 
-
-
             }
+
         });
+
+        meteorRain();
+
 
         startTimer();
 
 
     }
+
+    private void meteorRain() {
+
+        imageViewMeteorite.animate().translationXBy(-1000).translationYBy(2000).setDuration(3000);
+
+
+
+    }
+
+
+
 
 
     private void startTimer() {
@@ -106,6 +137,9 @@ public class GameActivity extends AppCompatActivity {
 
         timerTextView.setText(timeLefText);
     }
+
+
+
 
 
 }
